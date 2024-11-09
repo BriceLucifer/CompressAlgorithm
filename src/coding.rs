@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::{self, Read, Write};
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -65,4 +67,52 @@ pub fn huffman_encoding(word: Vec<char>) -> (String, HashMap<char, String>) {
     let encoded_word = word.iter().map(|c| codes[c].clone()).collect::<String>();
 
     (encoded_word, codes)
+}
+
+pub fn compress_file(input_file: &str, output_file: &str) -> io::Result<()> {
+    let mut file = File::open(input_file)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+
+    let (encoded_data, codes) = huffman_encoding(contents.chars().collect());
+
+    let mut encoded_bytes = Vec::new();
+    let mut byte = 0u8;
+    let mut bit_count = 0;
+
+    for bit in encoded_data.chars() {
+        byte <<= 1;
+        if bit == '1' {
+            byte |= 1;
+        }
+        bit_count += 1;
+
+        if bit_count == 8 {
+            encoded_bytes.push(byte);
+            byte = 0;
+            bit_count = 0;
+        }
+    }
+
+    // 如果最后有未满8位的字节，记录填充的位数并添加到文件
+    let padding_bits = if bit_count > 0 {
+        byte <<= 8 - bit_count;
+        encoded_bytes.push(byte);
+        8 - bit_count
+    } else {
+        0
+    };
+
+    let mut output = File::create(output_file)?;
+
+    // 写入填充位数信息（1字节）
+    output.write_all(&[padding_bits as u8])?;
+
+    let serialized_codes = serde_json::to_string(&codes)?;
+    output.write_all(&(serialized_codes.len() as u32).to_be_bytes())?;
+    output.write_all(serialized_codes.as_bytes())?;
+
+    output.write_all(&encoded_bytes)?;
+
+    Ok(())
 }
