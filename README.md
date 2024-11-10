@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/github/license/BriceLucifer/CompressAlgorithm) ![Issues](https://img.shields.io/github/issues/BriceLucifer/CompressAlgorithm) ![Stars](https://img.shields.io/github/stars/BriceLucifer/CompressAlgorithm) ![Languages](https://img.shields.io/github/languages/top/BriceLucifer/CompressAlgorithm)
 
-A high-performance, lightweight compression tool designed to make file storage and transfer more efficient. MyCompressionTool implemented by HuffmanAlgorithm.
+A high-performance, lightweight compression tool designed to make file storage and transfer more efficient. MyCompressionAlgorithm implemented by HuffmanAlgorithm in Rust.
 
 ## 🎉 Features
 
