@@ -63,7 +63,7 @@ unimplemented
 - **src/** - Main source files for the compression tool
 - **tests/** - Test cases for ensuring code quality and functionality
 - **examples/** - Usage examples and scripts
-    > I use [enwik8](https://mattmahoney.net/dc/enwik8.zip)
+    > I use [enwik8](https://mattmahoney.net/dc/enwik8.zip) as performence test, but i store a simple page for example, because I don't have too much storage.
 
 ## 🤝 Contributing
 
