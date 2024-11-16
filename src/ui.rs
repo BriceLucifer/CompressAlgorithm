@@ -1,4 +1,4 @@
-use clap::{Parser, Subcommand};
+use clap::Parser;
 use std::{fs, io, path::PathBuf};
 
 use crate::{compress_file, decompress_file};
