@@ -4,6 +4,24 @@ use std::time::Instant;
 use std::io::{self, Read};
 
 fn main() -> io::Result<()> {
+    compress_test()
+}
+
+/// 比较两个文件的内容是否相同
+fn compare_files(file1: &str, file2: &str) -> io::Result<bool> {
+    let mut f1 = fs::File::open(file1)?;
+    let mut f2 = fs::File::open(file2)?;
+
+    let mut buf1 = Vec::new();
+    let mut buf2 = Vec::new();
+
+    f1.read_to_end(&mut buf1)?;
+    f2.read_to_end(&mut buf2)?;
+
+    Ok(buf1 == buf2)
+}
+
+pub fn compress_test() -> io::Result<()>{
     // 原文件和压缩文件路径
     let input_file = "./example/example.txt";
     let compressed_file = "./example/compressed.huff";
@@ -50,18 +68,4 @@ fn main() -> io::Result<()> {
     }
 
     Ok(())
-}
-
-/// 比较两个文件的内容是否相同
-fn compare_files(file1: &str, file2: &str) -> io::Result<bool> {
-    let mut f1 = fs::File::open(file1)?;
-    let mut f2 = fs::File::open(file2)?;
-
-    let mut buf1 = Vec::new();
-    let mut buf2 = Vec::new();
-
-    f1.read_to_end(&mut buf1)?;
-    f2.read_to_end(&mut buf2)?;
-
-    Ok(buf1 == buf2)
 }
