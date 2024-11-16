@@ -32,19 +32,27 @@ Alternatively, you can download pre-built binaries from the [releases page](http
 
 ### Usage
 ```bash
-cargo run
+cargo run -- -h
+
+> Usage: huffman.exe [OPTIONS]
+
+  Options:
+    -c, --compress <FILE>    Compress a Huffman file
+    -d, --decompress <FILE>  Decompress a Huffman file
+    -o, --output <FILE>      Output file name
+    -h, --help               Print help
 ```
 
 #### Basic Compression
 
 ```bash
-unimplemented
+huffman.exe -c <FILE> -o <FILE>
 ```
 
 #### Basic Decompression
 
 ```bash
-unimplemented
+huffman.exe -d <FILE> -o <FILE>
 ```
 
 #### Advanced Options
