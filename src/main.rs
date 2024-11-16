@@ -1,10 +1,10 @@
-use huffman::{compress_file, decompress_file};
+use huffman::{compress_file, decompress_file, ui};
 use std::fs;
 use std::time::Instant;
 use std::io::{self, Read};
 
 fn main() -> io::Result<()> {
-    compress_test()
+    ui()
 }
 
 /// 比较两个文件的内容是否相同
