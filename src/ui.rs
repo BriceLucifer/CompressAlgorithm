@@ -57,6 +57,10 @@ pub fn ui() -> Result<(), io::Error> {
     Ok(())
 }
 
+/*
+    handle compress function
+        show: compression ratio, file_name
+*/
 fn handle_compress(compress_path: &PathBuf, output_path: &PathBuf) -> Result<(), io::Error> {
     println!("Compressing file: {}", compress_path.display());
     let compress_path_str = compress_path
@@ -71,6 +75,10 @@ fn handle_compress(compress_path: &PathBuf, output_path: &PathBuf) -> Result<(),
     Ok(())
 }
 
+/*
+    handle decompress function
+        show: file_name
+*/
 fn handle_decompress(decompress_path: &PathBuf, output_path: &PathBuf) -> Result<(), io::Error> {
     println!("Decompressing file: {}", decompress_path.display());
     let decompress_path_str = decompress_path
@@ -83,7 +91,7 @@ fn handle_decompress(decompress_path: &PathBuf, output_path: &PathBuf) -> Result
     Ok(())
 }
 
-pub fn compression_ratio(original: &str, compressed: &str) -> Result<f64, io::Error> {
+fn compression_ratio(original: &str, compressed: &str) -> Result<f64, io::Error> {
     let original_size = fs::metadata(original)?.len() as f64 / (1024.0 * 1024.0); // 转换为 MB
     let compressed_size = fs::metadata(compressed)?.len() as f64 / (1024.0 * 1024.0);
 
